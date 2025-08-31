@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Teclado para controlar barra de leds</title>
+  <style>
+    body { background-image: url("https://magicplanetanime.design.blog/wp-content/uploads/2021/04/mx0rryu.jpg?w=984"); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed; font-family: Arial, sans-serif; text-align: center; }
+    .grid { display: grid; grid-template-columns: repeat(3, 80px); gap: 10px; justify-content: center; margin-top: 50px; }
+    button { font-size: 20px; color: rgb(125, 242, 255); background-color: #ffffff; transition-duration: 0.4s; padding: 20px; border-radius: 10px; cursor: pointer; }    
+    #msg { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Teclado para control de barra de leds.</h1>
+  
+  <div class="grid">
+    <button onclick="sendOption(1)">1</button>
+    <button onclick="sendOption(2)">2</button>
+    <button onclick="sendOption(3)">3</button>
+    <button onclick="sendOption(4)">4</button>
+    <button onclick="sendOption(5)">5</button>
+    <button onclick="sendOption(6)">6</button>
+    <button onclick="sendOption(7)">7</button>
+    <button onclick="sendOption(8)">8</button>
+    <button onclick="sendOption(9)">9</button>
+  </div>
+  
+  <div id="msg"></div>
+
+  <div>
+    <img src="https://www.fightersgeneration.com/characters/chunli-gem-super2.gif">
+  </div>
+
+  <script>
+    function sendOption(num) {
+      fetch('/seleccion?num=' + num)
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById("msg").innerText = "Secuencia " + num + " ejecutada";
+        })
+        .catch(err => {
+          document.getElementById("msg").innerText = "Error de conexión";
+        });
+    }
+  </script>
+</body>
+</html>
